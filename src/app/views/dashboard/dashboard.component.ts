@@ -1,7 +1,7 @@
 import { DOCUMENT, NgStyle } from '@angular/common';
 import { Component, DestroyRef, effect, inject, OnInit, Renderer2, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ChartOptions } from 'chart.js';
+import { ChartOptions , ChartType,} from 'chart.js';
 import {
   AvatarComponent,
   ButtonDirective,
@@ -25,7 +25,9 @@ import { IconDirective } from '@coreui/icons-angular';
 import { WidgetsBrandComponent } from '../widgets/widgets-brand/widgets-brand.component';
 import { WidgetsDropdownComponent } from '../widgets/widgets-dropdown/widgets-dropdown.component';
 import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
-
+import { DataService } from '../../data.service';
+import { CommonModule } from '@angular/common'; // Import CommonModule
+import { ChartjsModule } from '@coreui/angular-chartjs';
 interface IUser {
   name: string;
   state: string;
@@ -44,14 +46,19 @@ interface IUser {
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss'],
   standalone: true,
-  imports: [WidgetsDropdownComponent, TextColorDirective, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ReactiveFormsModule, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressBarDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent]
+  imports: [ChartjsModule,CommonModule,WidgetsDropdownComponent, TextColorDirective, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ReactiveFormsModule, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressBarDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent]
 })
 export class DashboardComponent implements OnInit {
 
+  arrayItem: any[] = [];
+  accData: number[][] = [];
+  gyroData: number[][] = [];
   readonly #destroyRef: DestroyRef = inject(DestroyRef);
   readonly #document: Document = inject(DOCUMENT);
   readonly #renderer: Renderer2 = inject(Renderer2);
   readonly #chartsData: DashboardChartsData = inject(DashboardChartsData);
+
+  constructor(private dataService: DataService, public chartData: DashboardChartsData) { }
 
   public users: IUser[] = [
     {
@@ -134,7 +141,7 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  public mainChart: IChartProps = { type: 'line' };
+  public mainChart: IChartProps = { type: 'line' as ChartType };
   public mainChartRef: WritableSignal<any> = signal(undefined);
   #mainChartRefEffect = effect(() => {
     if (this.mainChartRef()) {
@@ -148,7 +155,14 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCharts();
+    this.chartData.initMainChart();
     this.updateChartOnColorModeChange();
+
+     this.dataService.getData().subscribe(data => {
+      this.arrayItem = data;
+      // this.prepareChartData();
+      console.log(this.arrayItem)
+    });
   }
 
   initCharts(): void {
@@ -157,7 +171,7 @@ export class DashboardComponent implements OnInit {
 
   setTrafficPeriod(value: string): void {
     this.trafficRadioGroup.setValue({ trafficRadio: value });
-    this.#chartsData.initMainChart(value);
+    this.#chartsData.initMainChart();
     this.initCharts();
   }
 
@@ -187,4 +201,14 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
+
+  // prepareChartData(): void {
+  //   for (const item of this.arrayItem) {
+  //     this.#chartsData.mainChart["Data1"].push(item.data.acc.x )
+  //     this.#chartsData.mainChart["Data2"].push(item.data.acc.y )
+  //     this.#chartsData.mainChart["Data3"].push(item.data.acc.z )
+  //     this.accData.push([item.measurementNumber, item.data.acc.x, item.data.acc.y, item.data.acc.z]);
+  //     this.gyroData.push([item.measurementNumber, item.data.gyro.x, item.data.gyro.y, item.data.gyro.z]);
+  //   }
+  // }
 }

@@ -1,0 +1,384 @@
+[
+    {
+      "measurementNumber": 1,
+      "data": {
+        "acc": { "x": -513, "y": 713, "z": -7906 },
+        "gyro": { "x": -400, "y": -421, "z": -205 }
+      },
+      "temperature": 21,
+      "voltage": 0.19,
+      "lightLevel": 0.08228429158,
+      "battery": 94
+    },
+    {
+      "measurementNumber": 2,
+      "data": {
+        "acc": { "x": 277, "y": 552, "z": -7948 },
+        "gyro": { "x": -1132, "y": -203, "z": 1581 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08402824401,
+      "battery": 95,
+      "mag": { "x": -516, "y": -210, "z": 1056 }
+    },
+    {
+      "measurementNumber": 3,
+      "data": {
+        "acc": { "x": -416, "y": 301, "z": -8182 },
+        "gyro": { "x": -873, "y": 1530, "z": -1295 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.07925542195,
+      "battery": 93,
+      "mag": { "x": -525, "y": -213, "z": 1057 }
+    },
+    {
+      "measurementNumber": 4,
+      "temperature": 21,
+      "voltage": 0.21,
+      "lightLevel": 0.08334636688,
+      "battery": 94
+    },
+    {
+      "measurementNumber": 5,
+      "data": {
+        "acc": { "x": -577, "y": 79, "z": -8158 },
+        "gyro": { "x": 3374, "y": -2773, "z": -866 }
+      },
+      "temperature": 20.875,
+      "voltage": 0.23,
+      "lightLevel": 0.08299763997,
+      "battery": 96,
+      "mag": { "x": -523, "y": -212, "z": 1064 }
+    },
+    {
+      "measurementNumber": 6,
+      "data": {
+        "acc": { "x": 127, "y": 1106, "z": -7641 },
+        "gyro": { "x": 1081, "y": -2070, "z": -145 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08177947998,
+      "battery": 94,
+      "mag": { "x": -527, "y": -209, "z": 1060 }
+    },
+    {
+      "measurementNumber": 7,
+      "data": {
+        "acc": { "x": -613, "y": -526, "z": -8030 },
+        "gyro": { "x": -1768, "y": 682, "z": 310 }
+      },
+      "temperature": 21,
+      "voltage": 0.19,
+      "lightLevel": 0.08127466837,
+      "battery": 94
+    },
+    {
+      "measurementNumber": 8,
+      "data": {
+        "acc": { "x": 264, "y": -244, "z": -8127 },
+        "gyro": { "x": 150, "y": -889, "z": -267 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08193397521,
+      "battery": 94,
+      "mag": { "x": -522, "y": -221, "z": 1052 }
+    },
+    {
+      "measurementNumber": 9,
+      "data": {
+        "acc": { "x": 564, "y": -337, "z": -7964 },
+        "gyro": { "x": 30, "y": -692, "z": 745 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.07933028539,
+      "battery": 93,
+      "mag": { "x": -524, "y": -214, "z": 1061 }
+    },
+    {
+      "measurementNumber": 10,
+      "data": {
+        "acc": { "x": 784, "y": -450, "z": -8034 },
+        "gyro": { "x": 160, "y": -578, "z": -22 }
+      },
+      "temperature": 21,
+      "voltage": 0.21,
+      "lightLevel": 0.08205111821,
+      "battery": 92,
+      "mag": { "x": -524, "y": -214, "z": 1061 }
+    },
+    {
+      "measurementNumber": 11,
+      "data": {
+        "acc": { "x": 777, "y": -413, "z": -7898 },
+        "gyro": { "x": 150, "y": -589, "z": 3 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08219146728,
+      "battery": 95,
+      "mag": { "x": -526, "y": -213, "z": 1065 }
+    },
+    {
+      "measurementNumber": 12,
+      "data": {
+        "acc": { "x": -5, "y": 389, "z": -7993 },
+        "gyro": { "x": 587, "y": -54, "z": -2 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08160734176,
+      "battery": 95
+    },
+    {
+      "measurementNumber": 13,
+      "data": {
+        "acc": { "x": -779, "y": 182, "z": -8430 },
+        "gyro": { "x": -2159, "y": 1453, "z": -222 }
+      },
+      "temperature": 21,
+      "voltage": 0.21,
+      "lightLevel": 0.08313655853,
+      "battery": 92,
+      "mag": { "x": -524, "y": -214, "z": 1048 }
+    },
+    {
+      "measurementNumber": 14,
+      "data": {
+        "acc": { "x": -779, "y": -269, "z": -7993 },
+        "gyro": { "x": 203, "y": -970, "z": -132 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08406257629,
+      "battery": 94,
+      "mag": { "x": -528, "y": -214, "z": 1061 }
+    },
+    {
+      "measurementNumber": 15,
+      "data": {
+        "acc": { "x": -415, "y": 119, "z": -8159 },
+        "gyro": { "x": 2247, "y": -1554, "z": 782 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.07986068725,
+      "battery": 93
+    },
+    {
+      "measurementNumber": 16,
+      "data": {
+        "acc": { "x": -859, "y": -489, "z": -8235 },
+        "gyro": { "x": -3072, "y": 1225, "z": -125 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.08326768875,
+      "battery": 86,
+      "mag": { "x": -524, "y": -215, "z": 1052 }
+    },
+    {
+      "measurementNumber": 17,
+      "data": {
+        "acc": { "x": -383, "y": 256, "z": -8242 },
+        "gyro": { "x": 1771, "y": -1965, "z": -246 }
+      },
+      "temperature": 21,
+      "voltage": 0.18,
+      "lightLevel": 0.08225838343,
+      "battery": 94
+    },
+    {
+      "measurementNumber": 18,
+      "data": {
+        "acc": { "x": -115, "y": 1005, "z": -7959 },
+        "gyro": { "x": -811, "y": -385, "z": -727 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.08155616124,
+      "battery": 94,
+      "mag": { "x": -524, "y": -218, "z": 1058 }
+    },
+    {
+      "measurementNumber": 19,
+      "data": {
+        "acc": { "x": -562, "y": 432, "z": -8524 },
+        "gyro": { "x": -900, "y": 448, "z": -338 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08339881896,
+      "battery": 76,
+      "mag": { "x": -523, "y": -219, "z": 1052 }
+    },
+    {
+      "measurementNumber": 20,
+      "data": {
+        "acc": { "x": -239, "y": 359, "z": -7919 },
+        "gyro": { "x": 1216, "y": -1922, "z": 1290 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.07343626022,
+      "battery": 91
+    },
+    {
+      "measurementNumber": 21,
+      "data": {
+        "acc": { "x": -46, "y": 993, "z": -10047 },
+        "gyro": { "x": 1158, "y": 557, "z": 142 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08310190836,
+      "battery": 95,
+      "mag": { "x": -523, "y": -211, "z": 1052 }
+    },
+    {
+      "measurementNumber": 22,
+      "data": {
+        "acc": { "x": 1549, "y": -176, "z": -8890 },
+        "gyro": { "x": -466, "y": -1240, "z": -36 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.07441171010,
+      "battery": 90,
+      "mag": { "x": -520, "y": -207, "z": 1054 }
+    },
+    {
+      "measurementNumber": 23,
+      "data": {
+        "acc": { "x": -721, "y": 49, "z": -8129 },
+        "gyro": { "x": 495, "y": -1276, "z": -539 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08499526977,
+      "battery": 92
+    },
+    {
+      "measurementNumber": 24,
+      "data": {
+        "acc": { "x": -277, "y": 488, "z": -7854 },
+        "gyro": { "x": 3466, "y": -2566, "z": 397 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.08323224385,
+      "battery": 95,
+      "mag": { "x": -521, "y": -220, "z": 1064 }
+    },
+    {
+      "measurementNumber": 25,
+      "data": {
+        "acc": { "x": 192, "y": 896, "z": -7968 },
+        "gyro": { "x": 4340, "y": -2876, "z": 1078 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.07648229598,
+      "battery": 92,
+      "mag": { "x": -524, "y": -212, "z": 1056 }
+    },
+    {
+      "measurementNumber": 26,
+      "data": {
+        "acc": { "x": 313, "y": 1050, "z": -7650 },
+        "gyro": { "x": -1732, "y": 821, "z": -864 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08662176132,
+      "battery": 92
+    },
+    {
+      "measurementNumber": 27,
+      "data": {
+        "acc": { "x": -1017, "y": -576, "z": -8072 },
+        "gyro": { "x": -380, "y": -63, "z": -272 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.08252843221,
+      "battery": 94,
+      "mag": { "x": -522, "y": -214, "z": 1040 }
+    },
+    {
+      "measurementNumber": 28,
+      "data": {
+        "acc": { "x": -364, "y": 240, "z": -8089 },
+        "gyro": { "x": 2470, "y": -1745, "z": 1110 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.08147939046,
+      "battery": 89
+    },
+    {
+      "measurementNumber": 29,
+      "data": {
+        "acc": { "x": -583, "y": -46, "z": -8226 },
+        "gyro": { "x": -1236, "y": 590, "z": -1021 }
+      },
+      "temperature": 21,
+      "voltage": 0.21,
+      "lightLevel": 0.08518218994,
+      "battery": 94,
+      "mag": { "x": -524, "y": -213, "z": 1049 }
+    },
+    {
+      "measurementNumber": 30,
+      "data": {
+        "acc": { "x": -896, "y": 178, "z": -8107 },
+        "gyro": { "x": 391, "y": 1017, "z": 659 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08448934555,
+      "battery": 94,
+      "mag": { "x": -525, "y": -213, "z": 1062 }
+    },
+    {
+      "measurementNumber": 31,
+      "data": {
+        "acc": { "x": 777, "y": -464, "z": -8029 },
+        "gyro": { "x": 157, "y": -611, "z": -1 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08031558990,
+      "battery": 84
+    },
+    {
+      "measurementNumber": 32,
+      "data": {
+        "acc": { "x": 777, "y": -440, "z": -7968 },
+        "gyro": { "x": 154, "y": -603, "z": -12 }
+      },
+      "temperature": 21,
+      "voltage": 0.22,
+      "lightLevel": 0.08363485336,
+      "battery": 94,
+      "mag": { "x": -523, "y": -213, "z": 1065 }
+    },
+    {
+      "measurementNumber": 33,
+      "data": {
+        "acc": { "x": 892, "y": -383, "z": -8282 },
+        "gyro": { "x": 162, "y": -617, "z": -15 }
+      },
+      "temperature": 21,
+      "voltage": 0.23,
+      "lightLevel": 0.08115132649,
+      "battery": 94,
+      "mag": { "x": -518, "y": -212, "z": 1048 }
+    }
+  ]
+  

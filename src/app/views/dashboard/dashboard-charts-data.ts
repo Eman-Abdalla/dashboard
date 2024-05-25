@@ -10,13 +10,16 @@ import {
 } from 'chart.js';
 import { DeepPartial } from 'chart.js/dist/types/utils';
 import { getStyle, hexToRgba } from '@coreui/utils';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface IChartProps {
   data?: ChartData;
   labels?: any;
   options?: ChartOptions;
   colors?: any;
-  type: ChartType;
+  type: ChartType ;
   legend?: any;
 
   [propName: string]: any;
@@ -26,149 +29,121 @@ export interface IChartProps {
   providedIn: 'any'
 })
 export class DashboardChartsData {
-  constructor() {
+  public mainChart: IChartProps = { type: "line"  as ChartType};
+
+  constructor(private http: HttpClient) {
     this.initMainChart();
   }
 
-  public mainChart: IChartProps = { type: 'line' };
-
-  public random(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+  getData(): Observable<any[]> {
+    const jsonUrl = 'assets/data.json'; // Adjust the path as necessary
+    return this.http.get<any[]>(jsonUrl);
   }
 
-  initMainChart(period: string = 'Month') {
-    const brandSuccess = getStyle('--cui-success') ?? '#4dbd74';
-    const brandInfo = getStyle('--cui-info') ?? '#20a8d8';
-    const brandInfoBg = hexToRgba(getStyle('--cui-info') ?? '#20a8d8', 10);
-    const brandDanger = getStyle('--cui-danger') ?? '#f86c6b';
+  initMainChart() {
+    const brandSuccess = '#4dbd74';
+    const brandInfo = '#20a8d8';
+    const brandDanger = '#f86c6b';
 
-    // mainChart
-    this.mainChart['elements'] = period === 'Month' ? 12 : 27;
-    this.mainChart['Data1'] = [];
-    this.mainChart['Data2'] = [];
-    this.mainChart['Data3'] = [];
-
-    // generate random values for mainChart
-    for (let i = 0; i <= this.mainChart['elements']; i++) {
-      this.mainChart['Data1'].push(this.random(50, 240));
-      this.mainChart['Data2'].push(this.random(20, 160));
-      this.mainChart['Data3'].push(65);
-    }
-
-    let labels: string[] = [];
-    if (period === 'Month') {
-      labels = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ];
-    } else {
-      /* tslint:disable:max-line-length */
-      const week = [
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-        'Sunday'
-      ];
-      labels = week.concat(week, week, week);
-    }
-
-    const colors = [
-      {
-        // brandInfo
-        backgroundColor: brandInfoBg,
-        borderColor: brandInfo,
-        pointHoverBackgroundColor: brandInfo,
-        borderWidth: 2,
-        fill: true
-      },
-      {
-        // brandSuccess
-        backgroundColor: 'transparent',
-        borderColor: brandSuccess || '#4dbd74',
-        pointHoverBackgroundColor: '#fff'
-      },
-      {
-        // brandDanger
-        backgroundColor: 'transparent',
-        borderColor: brandDanger || '#f86c6b',
-        pointHoverBackgroundColor: brandDanger,
-        borderWidth: 1,
-        borderDash: [8, 5]
+    this.getData().subscribe(data => {
+     
+      if (!Array.isArray(data)) {
+        console.error('Data is not an array');
+        return;
       }
-    ];
 
-    const datasets: ChartDataset[] = [
-      {
-        data: this.mainChart['Data1'],
-        label: 'Current',
-        ...colors[0]
-      },
-      {
-        data: this.mainChart['Data2'],
-        label: 'Previous',
-        ...colors[1]
-      },
-      {
-        data: this.mainChart['Data3'],
-        label: 'BEP',
-        ...colors[2]
-      }
-    ];
+      const accDataX = data.map(item => item.data?.acc?.x ?? null);
+      const accDataY = data.map(item => item.data?.acc?.y ?? null);
+      const accDataZ = data.map(item => item.data?.acc?.z ?? null);
 
-    const plugins: DeepPartial<PluginOptionsByType<any>> = {
-      legend: {
-        display: false
-      },
-      tooltip: {
-        callbacks: {
-          labelColor: (context) => ({ backgroundColor: context.dataset.borderColor } as TooltipLabelStyle)
-        }
-      }
-    };
+      const gyroDataX = data.map(item => item.data?.gyro?.x ?? null);
+      const gyroDataY = data.map(item => item.data?.gyro?.y ?? null);
+      const gyroDataZ = data.map(item => item.data?.gyro?.z ?? null);
 
-    const scales = this.getScales();
+      const labels = data.map(item => `Measurement ${item.measurementNumber}`);
 
-    const options: ChartOptions = {
-      maintainAspectRatio: false,
-      plugins,
-      scales,
-      elements: {
-        line: {
-          tension: 0.4
+      const datasets: ChartDataset[] = [
+        {
+          data: accDataX,
+          label: 'Acc X',
+          borderColor: brandInfo,
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          fill: false
         },
-        point: {
-          radius: 0,
-          hitRadius: 10,
-          hoverRadius: 4,
-          hoverBorderWidth: 3
+        {
+          data: accDataY,
+          label: 'Acc Y',
+          borderColor: brandSuccess,
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          fill: false
+        },
+        {
+          data: accDataZ,
+          label: 'Acc Z',
+          borderColor: brandDanger,
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          fill: false
+        },
+        {
+          data: gyroDataX,
+          label: 'Gyro X',
+          borderColor: brandInfo,
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          fill: false,
+          borderDash: [8, 5]
+        },
+        {
+          data: gyroDataY,
+          label: 'Gyro Y',
+          borderColor: brandSuccess,
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          fill: false,
+          borderDash: [8, 5]
+        },
+        {
+          data: gyroDataZ,
+          label: 'Gyro Z',
+          borderColor: brandDanger,
+          backgroundColor: 'transparent',
+          borderWidth: 2,
+          fill: false,
+          borderDash: [8, 5]
         }
-      }
-    };
+      ];
+      console.log( ".>>>>>>>>>>>>>2"+datasets)
+      const options: ChartOptions = {
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: true
+          },
+          tooltip: {
+            callbacks: {
+              labelColor: (context) => ({
+                backgroundColor: context.dataset.borderColor
+              } as TooltipLabelStyle)
+            }
+          }
+        },
+        scales: this.getScales()
+      };
 
-    this.mainChart.type = 'line';
-    this.mainChart.options = options;
-    this.mainChart.data = {
-      datasets,
-      labels
-    };
+      this.mainChart = {
+        type: 'line' as ChartType,
+        data: { labels, datasets },
+        options
+      };
+    });
   }
 
   getScales() {
-    const colorBorderTranslucent = getStyle('--cui-border-color-translucent');
-    const colorBody = getStyle('--cui-body-color');
+    const colorBorderTranslucent = '#ebedef';
+    const colorBody = '#6c757d';
 
     const scales: ScaleOptions<any> = {
       x: {
@@ -187,15 +162,14 @@ export class DashboardChartsData {
         grid: {
           color: colorBorderTranslucent
         },
-        max: 250,
         beginAtZero: true,
         ticks: {
           color: colorBody,
-          maxTicksLimit: 5,
-          stepSize: Math.ceil(250 / 5)
+          maxTicksLimit: 5
         }
       }
     };
     return scales;
   }
+
 }

@@ -61,43 +61,43 @@
         </form>
       </c-col>
     </c-row>
-    <c-chart
-      [data]="mainChart.data"
-      [height]="300"
-      [ngStyle]="{ 'marginTop.px': 40 }"
-      [options]="mainChart.options"
-      [type]="mainChart.type"
-      (chartRef)="handleChartRef($event)"
-    >
-      Main chart
-    </c-chart>
+    <div *ngIf="chartData.mainChart.data">
+      <c-chart
+      
+        [data]="chartData.mainChart.data"
+        [options]="chartData.mainChart.options">
+  
+      </c-chart>
+    </div>
+    
+     
   </c-card-body>
   <c-card-footer>
     <c-row class="text-center mb-2" [xl]="5" [lg]="4" [sm]="2" [xs]="1" [gutter]="4">
       <c-col>
-        <div class="text-body-secondary">Visits</div>
-        <strong>29.703 Users (40%)</strong>
-        <c-progress class="mt-2" thin color="success" value="40" />
+        <div class="text-body-secondary">Device Name</div>
+        <strong>arduino whatever</strong>
+        <c-progress class="mt-2" thin color="success" value="100" />
       </c-col>
       <c-col>
-        <div class="text-body-secondary">Unique</div>
-        <div class="fw-semibold text-truncate">24.093 Users (20%)</div>
-        <c-progress class="mt-2" thin color="info" value="20" />
+        <div class="text-body-secondary">Readings</div>
+        <div class="fw-semibold text-truncate">33 in span</div>
+        <c-progress class="mt-2" thin color="info" value="100" />
       </c-col>
       <c-col>
-        <div class="text-body-secondary">Page views</div>
-        <div class="fw-semibold text-truncate">78.706 Views (60%)</div>
-        <c-progress class="mt-2" thin color="warning" value="60" />
+        <div class="text-body-secondary">Location</div>
+        <div class="fw-semibold text-truncate">Chocolate Factory</div>
+        <c-progress class="mt-2" thin color="warning" value="100" />
       </c-col>
       <c-col>
-        <div class="text-body-secondary">New Users</div>
-        <div class="fw-semibold text-truncate">22.123 Users (80%)</div>
-        <c-progress class="mt-2" thin color="danger" value="80" />
+        <div class="text-body-secondary">Devices in Use</div>
+        <div class="fw-semibold text-truncate">Bluetooth</div>
+        <c-progress class="mt-2" thin color="danger" value="100" />
       </c-col>
       <c-col class="d-none d-xl-block">
-        <div class="text-body-secondary">Bounce Rate</div>
-        <div class="fw-semibold text-truncate">Average Rate (40.15%)</div>
-        <c-progress class="mt-2" thin value="40" />
+        <div class="text-body-secondary">Country</div>
+        <div class="fw-semibold text-truncate">Italy</div>
+        <c-progress class="mt-2" thin value="100" />
       </c-col>
     </c-row>
   </c-card-footer>
@@ -105,7 +105,7 @@
 
 <app-widgets-brand [withCharts]="true" />
 
-<c-row class="mt-4">
+<!-- <c-row class="mt-4" display="none">
   <c-col xs>
     <c-card class="mb-4">
       <c-card-header>Traffic {{ "&" }} Sales</c-card-header>
@@ -310,7 +310,7 @@
       </c-card-body>
     </c-card>
   </c-col>
-</c-row>
+</c-row> -->
 <c-row>
   <c-col xs>
     <c-card class="mb-4">
@@ -330,53 +330,53 @@
             </th>
             <th class="bg-body-tertiary">User</th>
             <th class="bg-body-tertiary text-center">Country</th>
-            <th class="bg-body-tertiary">Usage</th>
-            <th class="bg-body-tertiary text-center">Payment Method</th>
+            <th class="bg-body-tertiary">Temperature</th>
+            <th class="bg-body-tertiary text-center">Light Level</th>
             <th class="bg-body-tertiary">Activity</th>
           </tr>
           </thead>
           <tbody>
-            @for (user of users; track user.name; let i = $index) {
+            @for (user of arrayItem; track user.measurementNumber; ) {
               <tr>
                 <td class="text-center">
-                  <c-avatar [size]="'md'" src="{{ user.avatar }}" status="{{ user.status }}" />
+                  <!-- <c-avatar [size]="'md'" src="{{ user.avatar }}" status="{{ user.status }}" /> -->
                 </td>
                 <td>
-                  <div>{{ user.name }}</div>
+                  <div>{{ user.measurementNumber }}</div>
                   <div class="small text-body-secondary text-nowrap">
                   <span>
-                    {{ user.state }} | Registered: {{ user.registered }}
+                    {{ user.lightLevel }} | voltage Of: {{ user.voltage }}
                   </span>
                   </div>
                 </td>
                 <td class="text-center">
                   <svg
                     cIcon
-                    id="{{ user.country + user.name }}"
-                    name="cif{{ user.country }}"
+                    id="Italy"
+                    name="Italy"
                     size="xl"
-                    title="{{ user.country }}"
+                    title="Italy"
                   ></svg>
                 </td>
                 <td>
                   <div class="d-flex justify-content-between">
                     <div class="float-start">
-                      <strong>{{ user.usage }}%</strong>
+                      <strong>{{ user.temperature }}%</strong>
                     </div>
                     <div class="float-end ms-1 text-nowrap">
                       <small class="text-body-secondary">
-                        {{ user.period }}
+                        {{ user.lightLevel }}
                       </small>
                     </div>
                   </div>
-                  <c-progress thin [value]="user.usage" color="{{ user.color }}" />
+                  <c-progress thin [value]="user.temperature" color="success" />
                 </td>
                 <td class="text-center">
-                  <svg cIcon name="cibCc{{ user.payment }}" size="xl"></svg>
+                  <svg cIcon name="cibCc{{ user.lightLevel }}" size="xl"></svg>
                 </td>
                 <td>
-                  <div class="small text-body-secondary">Last login</div>
-                  <div class="fw-semibold text-nowrap">{{ user.activity }}</div>
+                  <div class="small text-body-secondary">Movement</div>
+                  <div class="fw-semibold text-nowrap">various</div>
                 </td>
               </tr>
             }

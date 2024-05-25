@@ -12,21 +12,27 @@ import { ChartjsComponent } from '@coreui/angular-chartjs';
 import { RouterLink } from '@angular/router';
 import { IconDirective } from '@coreui/icons-angular';
 import { RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, ThemeDirective, DropdownComponent, ButtonDirective, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, DropdownDividerDirective } from '@coreui/angular';
-
+import { CommonModule } from '@angular/common'; // Import CommonModule
+import { DataService } from '../../../data.service';
 @Component({
     selector: 'app-widgets-dropdown',
     templateUrl: './widgets-dropdown.component.html',
     styleUrls: ['./widgets-dropdown.component.scss'],
     changeDetection: ChangeDetectionStrategy.Default,
     standalone: true,
-    imports: [RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, IconDirective, ThemeDirective, DropdownComponent, ButtonDirective, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, RouterLink, DropdownDividerDirective, ChartjsComponent]
+    imports: [CommonModule,RowComponent, ColComponent, WidgetStatAComponent, TemplateIdDirective, IconDirective, ThemeDirective, DropdownComponent, ButtonDirective, DropdownToggleDirective, DropdownMenuDirective, DropdownItemDirective, RouterLink, DropdownDividerDirective, ChartjsComponent]
 })
 export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   constructor(
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private dataService: DataService
   ) {}
 
+  temperatureRange: { min: number, max: number } | null = null;
+  voltageRange: { min: number, max: number } | null = null;
+  batteryRange: { min: number, max: number } | null = null;
+  item: any[] = [];
   data: any[] = [];
   options: any[] = [];
   labels = [
@@ -125,8 +131,68 @@ export class WidgetsDropdownComponent implements OnInit, AfterContentInit {
 
   ngOnInit(): void {
     this.setData();
+    this.dataService.getData().subscribe(
+      data => {
+        this.item = data;
+        this.calculateTemp();
+        this.calculateVoltage()
+        this.calculateBattery()
+      },
+      error => {
+        console.error('Error fetching data:', error);
+      }
+    );
+    
   }
 
+  calculateTemp():void{
+    if (this.item.length === 0) return;
+
+    let minTemp = this.item[0].temperature;
+    let maxTemp = this.item[0].temperature;
+
+    for (const obj of this.item) {
+      if (obj.temperature < minTemp) {
+        minTemp = obj.temperature;
+      }
+      if (obj.temperature > maxTemp) {
+        maxTemp = obj.temperature;
+      }
+  }
+  this.temperatureRange = { min: minTemp, max: maxTemp };
+}
+calculateBattery():void{
+  if (this.item.length === 0) return;
+
+  let minTemp = this.item[0].battery;
+  let maxTemp = this.item[0].battery;
+
+  for (const obj of this.item) {
+    if (obj.battery < minTemp) {
+      minTemp = obj.battery;
+    }
+    if (obj.battery > maxTemp) {
+      maxTemp = obj.battery;
+    }
+}
+this.batteryRange = { min: minTemp, max: maxTemp };
+}
+calculateVoltage():void{
+  if (this.item.length === 0) return;
+
+  let minTemp = this.item[0].voltage;
+  let maxTemp = this.item[0].voltage;
+
+  for (const obj of this.item) {
+    if (obj.voltage < minTemp) {
+      minTemp = obj.voltage;
+    }
+    if (obj.voltage > maxTemp) {
+      maxTemp = obj.voltage;
+    }
+}
+this.voltageRange = { min: minTemp, max: maxTemp };
+}
   ngAfterContentInit(): void {
     this.changeDetectorRef.detectChanges();
 
