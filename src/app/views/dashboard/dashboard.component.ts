@@ -1,7 +1,7 @@
 import { DOCUMENT, NgStyle } from '@angular/common';
 import { Component, DestroyRef, effect, inject, OnInit, Renderer2, signal, WritableSignal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { ChartOptions , ChartType,} from 'chart.js';
+import { ChartOptions, ChartType } from 'chart.js';
 import {
   AvatarComponent,
   ButtonDirective,
@@ -28,6 +28,7 @@ import { DashboardChartsData, IChartProps } from './dashboard-charts-data';
 import { DataService } from '../../data.service';
 import { CommonModule } from '@angular/common'; // Import CommonModule
 import { ChartjsModule } from '@coreui/angular-chartjs';
+
 interface IUser {
   name: string;
   state: string;
@@ -46,19 +47,42 @@ interface IUser {
   templateUrl: 'dashboard.component.html',
   styleUrls: ['dashboard.component.scss'],
   standalone: true,
-  imports: [ChartjsModule,CommonModule,WidgetsDropdownComponent, TextColorDirective, CardComponent, CardBodyComponent, RowComponent, ColComponent, ButtonDirective, IconDirective, ReactiveFormsModule, ButtonGroupComponent, FormCheckLabelDirective, ChartjsComponent, NgStyle, CardFooterComponent, GutterDirective, ProgressBarDirective, ProgressComponent, WidgetsBrandComponent, CardHeaderComponent, TableDirective, AvatarComponent]
+  imports: [
+    ChartjsModule,
+    CommonModule,
+    WidgetsDropdownComponent,
+    TextColorDirective,
+    CardComponent,
+    CardBodyComponent,
+    RowComponent,
+    ColComponent,
+    ButtonDirective,
+    IconDirective,
+    ReactiveFormsModule,
+    ButtonGroupComponent,
+    FormCheckLabelDirective,
+    ChartjsComponent,
+    NgStyle,
+    CardFooterComponent,
+    GutterDirective,
+    ProgressBarDirective,
+    ProgressComponent,
+    WidgetsBrandComponent,
+    CardHeaderComponent,
+    TableDirective,
+    AvatarComponent
+  ]
 })
 export class DashboardComponent implements OnInit {
-
   arrayItem: any[] = [];
   accData: number[][] = [];
   gyroData: number[][] = [];
-  readonly #destroyRef: DestroyRef = inject(DestroyRef);
-  readonly #document: Document = inject(DOCUMENT);
-  readonly #renderer: Renderer2 = inject(Renderer2);
-  readonly #chartsData: DashboardChartsData = inject(DashboardChartsData);
+  readonly destroyRef: DestroyRef = inject(DestroyRef);
+  readonly document: Document = inject(DOCUMENT);
+  readonly renderer: Renderer2 = inject(Renderer2);
+  readonly chartData: DashboardChartsData = inject(DashboardChartsData);
 
-  constructor(private dataService: DataService, public chartData: DashboardChartsData) { }
+  constructor(private dataService: DataService, public chartsData: DashboardChartsData) {}
 
   public users: IUser[] = [
     {
@@ -141,37 +165,47 @@ export class DashboardComponent implements OnInit {
     }
   ];
 
-  public mainChart: IChartProps = { type: 'line' as ChartType };
+  public accelerationChart: IChartProps = { type: 'line' as ChartType };
+  public gyroChart: IChartProps = { type: 'line' as ChartType };
+  public vibrationChart: IChartProps = { type: 'line' as ChartType };
   public mainChartRef: WritableSignal<any> = signal(undefined);
-  #mainChartRefEffect = effect(() => {
+  mainChartRefEffect = effect(() => {
     if (this.mainChartRef()) {
       this.setChartStyles();
     }
   });
-  public chart: Array<IChartProps> = [];
   public trafficRadioGroup = new FormGroup({
     trafficRadio: new FormControl('Month')
   });
 
   ngOnInit(): void {
     this.initCharts();
-    this.chartData.initMainChart();
+    this.chartData.initMainChart().subscribe(() => {
+      this.accelerationChart = this.chartData.accelerationChart;
+      this.gyroChart = this.chartData.gyroChart;
+      this.vibrationChart = this.chartData.vibrationChart;
+    });
     this.updateChartOnColorModeChange();
 
-     this.dataService.getData().subscribe(data => {
+    this.dataService.getData().subscribe(data => {
       this.arrayItem = data;
-      // this.prepareChartData();
-      console.log(this.arrayItem)
+      console.log(this.arrayItem);
     });
   }
 
   initCharts(): void {
-    this.mainChart = this.#chartsData.mainChart;
+    this.accelerationChart = this.chartData.accelerationChart;
+    this.gyroChart = this.chartData.gyroChart;
+    this.vibrationChart = this.chartData.vibrationChart;
   }
 
   setTrafficPeriod(value: string): void {
     this.trafficRadioGroup.setValue({ trafficRadio: value });
-    this.#chartsData.initMainChart();
+    this.chartData.initMainChart().subscribe(() => {
+      this.accelerationChart = this.chartData.accelerationChart;
+      this.gyroChart = this.chartData.gyroChart;
+      this.vibrationChart = this.chartData.vibrationChart;
+    });
     this.initCharts();
   }
 
@@ -182,11 +216,11 @@ export class DashboardComponent implements OnInit {
   }
 
   updateChartOnColorModeChange() {
-    const unListen = this.#renderer.listen(this.#document.documentElement, 'ColorSchemeChange', () => {
+    const unListen = this.renderer.listen(this.document.documentElement, 'ColorSchemeChange', () => {
       this.setChartStyles();
     });
 
-    this.#destroyRef.onDestroy(() => {
+    this.destroyRef.onDestroy(() => {
       unListen();
     });
   }
@@ -194,21 +228,15 @@ export class DashboardComponent implements OnInit {
   setChartStyles() {
     if (this.mainChartRef()) {
       setTimeout(() => {
-        const options: ChartOptions = { ...this.mainChart.options };
-        const scales = this.#chartsData.getScales();
+        const options: ChartOptions = { ...this.accelerationChart.options };
+        const scales = this.chartData.getChartOptions().scales;
         this.mainChartRef().options.scales = { ...options.scales, ...scales };
         this.mainChartRef().update();
       });
     }
   }
 
-  // prepareChartData(): void {
-  //   for (const item of this.arrayItem) {
-  //     this.#chartsData.mainChart["Data1"].push(item.data.acc.x )
-  //     this.#chartsData.mainChart["Data2"].push(item.data.acc.y )
-  //     this.#chartsData.mainChart["Data3"].push(item.data.acc.z )
-  //     this.accData.push([item.measurementNumber, item.data.acc.x, item.data.acc.y, item.data.acc.z]);
-  //     this.gyroData.push([item.measurementNumber, item.data.gyro.x, item.data.gyro.y, item.data.gyro.z]);
-  //   }
-  // }
+  trackByMeasurementNumber(index: number, user: any): number {
+    return user.measurementNumber;
+  }
 }

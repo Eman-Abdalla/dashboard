@@ -36,6 +36,10 @@
     },
     {
       "measurementNumber": 4,
+      "data": {
+        "acc": { "x": -496, "y": 190, "z": -8170 },
+        "gyro": { "x": 1250, "y": -621, "z": -1080 }
+      },
       "temperature": 21,
       "voltage": 0.21,
       "lightLevel": 0.08334636688,

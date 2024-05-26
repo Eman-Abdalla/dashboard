@@ -6,12 +6,12 @@
     >
     <!-- <div *ngFor="let item of data"> -->
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-         <span> {{item.length}} </span> 
+         <span> Data Collected </span> 
          <br/>
-         <span>times</span>
+         <span>{{item.length}}</span>
     <!-- <p>Max Temperature: {{ temperatureRange?.max }}°C</p> -->
         <span class="fw-normal" style="font-size: 12px;">
-          (-12.4% <svg cIcon name="cilArrowBottom" size="sm"></svg>)
+           
         </span>
       </ng-template>
       <!-- </div> -->
@@ -44,11 +44,11 @@
       color="info"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>Temperature Range:  </span>
+        <span>Temperature:  </span>
         <br/>
         <span> {{ temperatureRange?.min }}°C - {{ temperatureRange?.max }}°C</span>
         <span class="fw-normal" style="font-size: 12px;">
-          (40.9%<svg cIcon name="cilArrowTop" size="sm"></svg>)
+          (10.9%<svg cIcon name="cilArrowTop" size="sm"></svg>)
         </span>
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
@@ -75,12 +75,12 @@
       color="warning"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>Voltage Range: </span>
+        <span>Voltage: </span>
         <br/>
-        <span> {{ voltageRange?.min }}°C - {{ voltageRange?.max }}°C</span>
-        <span class="fw-normal" style="font-size: 12px;">
-          (84.7% <svg cIcon name="cilArrowTop" size="sm"></svg>)
-        </span>
+        <span> {{ voltageRange?.min }} V - {{ voltageRange?.max }} V</span>
+          <span class="fw-normal" style="font-size: 12px;">
+            (10.9%<svg cIcon name="cilArrowTop" size="sm"></svg>)
+          </span> 
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">
@@ -106,12 +106,10 @@
       color="danger"
     >
       <ng-template cTemplateId="widgetValueTemplate" ngPreserveWhitespaces>
-        <span>Battery Range: </span>
+        <span>Battery: </span>
         <br/>
-        <span> {{ batteryRange?.min }}°C - {{ batteryRange?.max }}°C</span>
-        <span class="fw-normal" style="font-size: 12px;">
-          (-23.6% <svg cIcon name="cilArrowBottom" size="sm"></svg>)
-        </span>
+        <span> {{ batteryRange?.min }}% - {{ batteryRange?.max }}%</span>
+       
       </ng-template>
       <ng-template cTemplateId="widgetActionTemplate">
         <c-dropdown alignment="end" variant="btn-group">

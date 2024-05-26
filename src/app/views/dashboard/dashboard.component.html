@@ -1,17 +1,21 @@
-<app-widgets-dropdown />
+<app-widgets-dropdown></app-widgets-dropdown>
 <c-card class="my-4">
   <c-card-body>
     <c-row>
       <c-col sm="5">
-        <h4 class="card-title mb-0" id="traffic">Traffic</h4>
-        <div class="small text-body-secondary">January - December 2023</div>
+        <!-- Title and Date Range -->
+        <h4 class="card-title mb-0" id="traffic">Crane Performance</h4>
+        <div class="small text-body-secondary">April - May 2024</div>
       </c-col>
       <c-col class="d-none d-md-block" sm="7">
+        <!-- Download Button -->
         <button cButton class="float-end" color="primary">
           <svg cIcon name="cilCloudDownload"></svg>
         </button>
+        <!-- Form for Selecting Traffic Period -->
         <form [formGroup]="trafficRadioGroup">
           <c-button-group class="float-end me-3" role="group">
+            <!-- Radio Buttons for Period Selection -->
             <input
               class="btn-check"
               formControlName="trafficRadio"
@@ -61,70 +65,83 @@
         </form>
       </c-col>
     </c-row>
-    <div *ngIf="chartData.mainChart.data">
-      <c-chart
-      
-        [data]="chartData.mainChart.data"
-        [options]="chartData.mainChart.options">
-  
-      </c-chart>
-    </div>
     
-     
+    <!-- Acceleration and Gyro Charts Side by Side -->
+    <c-row>
+      <!-- Acceleration Chart -->
+      <c-col xs="12" lg="6">
+        <div *ngIf="accelerationChart.data">
+          <c-chart type="line" [data]="accelerationChart.data" [options]="accelerationChart.options"></c-chart>
+        </div>
+      </c-col>
+      
+      <!-- Gyro Chart -->
+      <c-col xs="12" lg="6">
+        <div *ngIf="gyroChart.data">
+          <c-chart type="line" [data]="gyroChart.data" [options]="gyroChart.options"></c-chart>
+        </div>
+      </c-col>
+    </c-row>
+    
+    <!-- Vibration Chart -->
+    <div *ngIf="vibrationChart.data">
+      <c-chart type="line" [data]="vibrationChart.data" [options]="vibrationChart.options"></c-chart>
+    </div>
   </c-card-body>
   <c-card-footer>
     <c-row class="text-center mb-2" [xl]="5" [lg]="4" [sm]="2" [xs]="1" [gutter]="4">
       <c-col>
         <div class="text-body-secondary">Device Name</div>
-        <strong>arduino whatever</strong>
-        <c-progress class="mt-2" thin color="success" value="100" />
+        <strong>Puck.js</strong>
+        <c-progress class="mt-2" thin color="success" value="100"></c-progress>
       </c-col>
       <c-col>
         <div class="text-body-secondary">Readings</div>
         <div class="fw-semibold text-truncate">33 in span</div>
-        <c-progress class="mt-2" thin color="info" value="100" />
+        <c-progress class="mt-2" thin color="info" value="100"></c-progress>
       </c-col>
       <c-col>
         <div class="text-body-secondary">Location</div>
-        <div class="fw-semibold text-truncate">Chocolate Factory</div>
-        <c-progress class="mt-2" thin color="warning" value="100" />
+        <div class="fw-semibold text-truncate">SCA Mechanical</div>
+        <c-progress class="mt-2" thin color="warning" value="100"></c-progress>
       </c-col>
       <c-col>
         <div class="text-body-secondary">Devices in Use</div>
         <div class="fw-semibold text-truncate">Bluetooth</div>
-        <c-progress class="mt-2" thin color="danger" value="100" />
+        <c-progress class="mt-2" thin color="danger" value="100"></c-progress>
       </c-col>
       <c-col class="d-none d-xl-block">
         <div class="text-body-secondary">Country</div>
         <div class="fw-semibold text-truncate">Italy</div>
-        <c-progress class="mt-2" thin value="100" />
+        <c-progress class="mt-2" thin value="100"></c-progress>
       </c-col>
     </c-row>
   </c-card-footer>
 </c-card>
 
-<app-widgets-brand [withCharts]="true" />
-
-<!-- <c-row class="mt-4" display="none">
+<!-- Widgets Brand Component -->
+<!-- <app-widgets-brand [withCharts]="true"></app-widgets-brand> -->
+<c-row class="mt-4">
   <c-col xs>
     <c-card class="mb-4">
-      <c-card-header>Traffic {{ "&" }} Sales</c-card-header>
+    
+      <c-card-header> <h4 class="card-title mb-0" id="traffic">Crane Lifts</h4> </c-card-header>
       <c-card-body>
         <c-row>
           <c-col md="6" xl="6" xs="12">
             <c-row>
               <c-col xs="6">
                 <div class="border-start border-start-4 border-start-info py-1 px-3 mb-3">
-                  <div class="text-body-secondary text-truncate small">New Clients</div>
-                  <div class="fs-5 fw-semibold">9,123</div>
+                  <div class="text-body-secondary text-truncate small">Total Items Lifted</div>
+                  <div class="fs-5 fw-semibold">150</div>
                 </div>
               </c-col>
               <c-col xs="6">
                 <div class="border-start border-start-4 border-start-danger py-1 px-3 mb-3">
                   <div class="text-body-secondary text-truncate small">
-                    Recurring Clients
+                    Total Weight of Items Lifted
                   </div>
-                  <div class="fs-5 fw-semibold">22,643</div>
+                  <div class="fs-5 fw-semibold">200KG</div>
                 </div>
               </c-col>
             </c-row>
@@ -134,8 +151,8 @@
                 <span class="text-body-secondary small">Monday</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="info" value="34" />
-                <c-progress thin color="danger" value="78" />
+                <c-progress thin color="info" value="34"></c-progress>
+                <c-progress thin color="danger" value="78"></c-progress>
               </div>
             </div>
             <div class="progress-group mb-4">
@@ -143,8 +160,8 @@
                 <span class="text-body-secondary small">Tuesday</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="info" value="56" />
-                <c-progress thin color="danger" value="94" />
+                <c-progress thin color="info" value="56"></c-progress>
+                <c-progress thin color="danger" value="94"></c-progress>
               </div>
             </div>
             <div class="progress-group mb-4">
@@ -152,8 +169,8 @@
                 <span class="text-body-secondary small">Wednesday</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="info" value="12" />
-                <c-progress thin color="danger" value="67" />
+                <c-progress thin color="info" value="12"></c-progress>
+                <c-progress thin color="danger" value="67"></c-progress>
               </div>
             </div>
             <div class="progress-group mb-4">
@@ -161,8 +178,8 @@
                 <span class="text-body-secondary small">Thursday</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="info" value="43" />
-                <c-progress thin color="danger" value="91" />
+                <c-progress thin color="info" value="43"></c-progress>
+                <c-progress thin color="danger" value="91"></c-progress>
               </div>
             </div>
             <div class="progress-group mb-4">
@@ -170,8 +187,8 @@
                 <span class="text-body-secondary small">Friday</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="info" value="22" />
-                <c-progress thin color="danger" value="73" />
+                <c-progress thin color="info" value="22"></c-progress>
+                <c-progress thin color="danger" value="73"></c-progress>
               </div>
             </div>
             <div class="progress-group mb-4">
@@ -179,8 +196,8 @@
                 <span class="text-body-secondary small">Saturday</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="info" value="53" />
-                <c-progress thin color="danger" value="82" />
+                <c-progress thin color="info" value="53"></c-progress>
+                <c-progress thin color="danger" value="82"></c-progress>
               </div>
             </div>
             <div class="progress-group mb-4">
@@ -188,8 +205,8 @@
                 <span class="text-body-secondary small">Sunday</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="info" value="9" />
-                <c-progress thin color="danger" value="69" />
+                <c-progress thin color="info" value="9"></c-progress>
+                <c-progress thin color="danger" value="69"></c-progress>
               </div>
             </div>
             <div class="legend text-center d-none d-md-block" ngPreserveWhitespaces>
@@ -197,12 +214,12 @@
                 <sup>
                   <span class="badge badge-pill badge-sm bg-info">&nbsp;</span>
                 </sup>
-                <span>New clients</span>
+                <span>Daily Items</span>
                 &nbsp;&nbsp;
                 <sup>
                   <span class="badge badge-pill badge-sm bg-danger">&nbsp;</span>
                 </sup>
-                <span>Recurring clients</span>
+                <span>Daily Weight</span>
               </small>
             </div>
           </c-col>
@@ -211,14 +228,14 @@
             <c-row>
               <c-col xs="6">
                 <div class="border-start border-start-4 border-start-warning py-1 px-3 mb-3">
-                  <div class="text-body-secondary text-truncate small">Page views</div>
-                  <div class="fs-5 fw-semibold">78,623</div>
+                  <div class="text-body-secondary text-truncate small">Average Weight per Lift</div>
+                  <div class="fs-5 fw-semibold">1.33KG</div>
                 </div>
               </c-col>
               <c-col xs="6">
                 <div class="border-start border-start-4 border-start-success py-1 px-3 mb-3">
-                  <div class="text-body-secondary text-truncate small">Organic</div>
-                  <div class="fs-5 fw-semibold">49,123</div>
+                  <div class="text-body-secondary text-truncate small">Maximum Weight Lifted</div>
+                  <div class="fs-5 fw-semibold">50KG</div>
                 </div>
               </c-col>
             </c-row>
@@ -227,93 +244,40 @@
 
             <div class="progress-group mb-4">
               <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cilUser"></svg>
-                <span>Male</span>
-                <span class="ms-auto font-semibold">43%</span>
+                <svg cIcon class="icon icon-lg me-2" name="cilHourglass"></svg>
+                <span>Operational Hours</span>
+                <span class="ms-auto font-semibold">120 hrs</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="warning" value="43" />
+                <c-progress thin color="warning" value="50"></c-progress>
               </div>
             </div>
             <div class="progress-group mb-5">
               <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cilUserFemale"></svg>
-                <span>Female</span>
-                <span class="ms-auto font-semibold">37%</span>
+                <svg cIcon class="icon icon-lg me-2" name="cilBalanceScale"></svg>
+                <span>Monthly Item Limit</span>
+                <span class="ms-auto font-semibold">30%</span>
               </div>
               <div class="progress-group-bars">
-                <c-progress thin color="warning" value="37" />
+                <c-progress thin color="warning" value="30"></c-progress>
               </div>
             </div>
 
-            <div class="progress-group">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibGoogle"></svg>
-                <span>Organic Search</span>
-                <span class="ms-auto font-semibold">
-                  191,235 <span class="text-body-secondary small">(56%)</span>
-                </span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin color="success" value="56" />
-              </div>
-            </div>
-            <div class="progress-group">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibFacebook"></svg>
-                <span>Facebook</span>
-                <span class="ms-auto font-semibold">
-                  51,223 <span class="text-body-secondary small">(15%)</span>
-                </span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin color="success" value="15" />
-              </div>
-            </div>
-            <div class="progress-group">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibTwitter"></svg>
-                <span>Twitter</span>
-                <span class="ms-auto font-semibold">
-                  37,564 <span class="text-body-secondary small">(11%)</span>
-                </span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin color="success" value="11" />
-              </div>
-            </div>
-            <div class="progress-group">
-              <div class="progress-group-header">
-                <svg cIcon class="icon icon-lg me-2" name="cibLinkedin"></svg>
-                <span>LinkedIn</span>
-                <span class="ms-auto font-semibold">
-                  27,319 <span class="text-body-secondary small">(8%)</span>
-                </span>
-              </div>
-              <div class="progress-group-bars">
-                <c-progress thin color="success" value="8" />
-              </div>
-            </div>
-            <div class="divider d-flex justify-content-center">
-              <button
-                cButton
-                class="text-muted btn-link"
-                color="transparent"
-                size="sm"
-                type="button"
-              >
-                <svg cIcon name="cil-options"></svg>
-              </button>
-            </div>
+
+            
           </c-col>
         </c-row>
       </c-card-body>
     </c-card>
   </c-col>
-</c-row> -->
-<c-row>
+</c-row>
+
+
+<c-row class="mt-4">
   <c-col xs>
+   
     <c-card class="mb-4">
+      <c-card-header> <h4 class="card-title mb-0" id="traffic">Environmental Data History</h4> </c-card-header>
       <c-card-body>
         <table
           [hover]="true"
@@ -325,61 +289,47 @@
         >
           <thead class="text-nowrap text-truncate">
           <tr>
-            <th class="bg-body-tertiary text-center ">
+            <th class="bg-body-tertiary text-center">
               <svg cIcon name="cilPeople"></svg>
             </th>
-            <th class="bg-body-tertiary">User</th>
-            <th class="bg-body-tertiary text-center">Country</th>
+            <th class="bg-body-tertiary">Measurement</th>
+            
             <th class="bg-body-tertiary">Temperature</th>
             <th class="bg-body-tertiary text-center">Light Level</th>
             <th class="bg-body-tertiary">Activity</th>
           </tr>
           </thead>
           <tbody>
-            @for (user of arrayItem; track user.measurementNumber; ) {
-              <tr>
-                <td class="text-center">
-                  <!-- <c-avatar [size]="'md'" src="{{ user.avatar }}" status="{{ user.status }}" /> -->
-                </td>
-                <td>
-                  <div>{{ user.measurementNumber }}</div>
-                  <div class="small text-body-secondary text-nowrap">
-                  <span>
-                    {{ user.lightLevel }} | voltage Of: {{ user.voltage }}
-                  </span>
+            <tr *ngFor="let user of arrayItem; trackBy: trackByMeasurementNumber">
+              <td class="text-center">
+                <!-- <c-avatar [size]="'md'" src="{{ user.avatar }}" status="{{ user.status }}" /> -->
+              </td>
+              <td>
+                <div>{{ user.measurementNumber }}</div>
+                <div class="small text-body-secondary text-nowrap">
+                  <span>{{ user.lightLevel }} | voltage Of: {{ user.voltage }}</span>
+                </div>
+              </td>
+              
+              <td>
+                <div class="d-flex justify-content-between">
+                  <div class="float-start">
+                    <strong>{{ user.temperature }}%</strong>
                   </div>
-                </td>
-                <td class="text-center">
-                  <svg
-                    cIcon
-                    id="Italy"
-                    name="Italy"
-                    size="xl"
-                    title="Italy"
-                  ></svg>
-                </td>
-                <td>
-                  <div class="d-flex justify-content-between">
-                    <div class="float-start">
-                      <strong>{{ user.temperature }}%</strong>
-                    </div>
-                    <div class="float-end ms-1 text-nowrap">
-                      <small class="text-body-secondary">
-                        {{ user.lightLevel }}
-                      </small>
-                    </div>
+                  <div class="float-end ms-1 text-nowrap">
+                    <small class="text-body-secondary">{{ user.lightLevel }}</small>
                   </div>
-                  <c-progress thin [value]="user.temperature" color="success" />
-                </td>
-                <td class="text-center">
-                  <svg cIcon name="cibCc{{ user.lightLevel }}" size="xl"></svg>
-                </td>
-                <td>
-                  <div class="small text-body-secondary">Movement</div>
-                  <div class="fw-semibold text-nowrap">various</div>
-                </td>
-              </tr>
-            }
+                </div>
+                <c-progress thin [value]="user.temperature" color="success"></c-progress>
+              </td>
+              <td class="text-center">
+                <svg cIcon name="cibCc{{ user.lightLevel }}" size="xl"></svg>
+              </td>
+              <td>
+                <div class="small text-body-secondary">Movement</div>
+                <div class="fw-semibold text-nowrap">various</div>
+              </td>
+            </tr>
           </tbody>
         </table>
       </c-card-body>
