@@ -272,7 +272,51 @@
   </c-col>
 </c-row>
 
+<!-- Maintenance Schedule Chart -->
+<c-card class="mb-4">
+    
+  <c-card-body>
+<c-row class="mt-4">
 
+  
+  <c-col xs="12" lg="6">
+  <h2>Maintenance Schedule</h2>
+ 
+    <c-chart  type="bar" [data]="maintenanceChart.data" [options]="maintenanceChart.options"
+    >
+  </c-chart>
+  </c-col>
+
+  <!-- Operational Hours Chart -->
+  <c-col xs="12" lg="6">
+  
+    <h2>Operational Hours</h2>
+    <c-chart type="line" [data]="operationalHoursChart.data" [options]="operationalHoursChart.options"
+    >
+    </c-chart>
+ 
+  </c-col>
+  
+</c-row>
+</c-card-body>
+</c-card>
+<c-row class="mt-4">
+  <c-col xs="12" lg="6">
+  <h2>Energy Consumption Chart</h2>
+ 
+  <c-chart  type="line" [data]="energyConsumptionChart.data" [options]="energyConsumptionChart.options"
+  >
+</c-chart>
+  </c-col>
+
+  <c-col xs="12" lg="6">
+    <h2>Energy Cost Saving Chart</h2>
+  <c-chart  type="line" [data]="energyCostSavingsChart.data" [options]="energyCostSavingsChart.options"
+  >
+</c-chart>
+  </c-col>
+  
+</c-row>
 <c-row class="mt-4">
   <c-col xs>
    

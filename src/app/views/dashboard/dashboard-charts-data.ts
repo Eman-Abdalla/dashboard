@@ -28,6 +28,10 @@ export class DashboardChartsData {
   public accelerationChart: IChartProps = { type: 'line' as ChartType };
   public gyroChart: IChartProps = { type: 'line' as ChartType };
   public vibrationChart: IChartProps = { type: 'line' as ChartType };
+  public maintenanceChart: IChartProps  = { type: 'line' as ChartType };
+  public operationalHoursChart: IChartProps  = { type: 'line' as ChartType };
+  public energyConsumptionChart: IChartProps  = { type: 'line' as ChartType };
+  public energyCostSavingsChart : IChartProps  = { type: 'line' as ChartType };
 
   constructor(private http: HttpClient) {}
 
@@ -133,6 +137,93 @@ export class DashboardChartsData {
           options: this.getChartOptions()
         };
 
+        this.maintenanceChart = {
+          type: 'bar' as ChartType,
+          data: {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [
+              {
+                data: [3, 2, 4, 1, 3],
+                label: 'Maintenance Activities',
+                backgroundColor: '#ffc107'
+              }
+            ]
+          },
+          options: {
+            maintainAspectRatio: false,
+            scales: {
+              x: { beginAtZero: true },
+              y: { beginAtZero: true }
+            }
+          }
+        };
+        this.energyConsumptionChart = {
+          type: 'line' as ChartType,
+          data: {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [
+              {
+                data: [500, 600, 450, 700, 650],
+                label: 'Energy Consumption (kWh)',
+                borderColor: '#20a8d8',
+                backgroundColor: 'transparent'
+              }
+            ]
+          },
+          options: {
+            maintainAspectRatio: false,
+            scales: {
+              x: { beginAtZero: true },
+              y: { beginAtZero: true }
+            }
+          }
+        };
+    
+        this.operationalHoursChart = {
+          type: 'line' as ChartType,
+          data: {
+            labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+            datasets: [
+              {
+                data: [8, 9, 7, 8, 9, 10, 6],
+                label: 'Operational Hours',
+                borderColor: '#4dbd74',
+                backgroundColor: 'transparent'
+              }
+            ]
+          },
+          options: {
+            maintainAspectRatio: false,
+            scales: {
+              x: { beginAtZero: true },
+              y: { beginAtZero: true }
+            }
+          }
+        };
+        this.energyCostSavingsChart = {
+          type: 'line' as ChartType,
+          data: {
+            labels: ['January', 'February', 'March', 'April', 'May'],
+            datasets: [
+              {
+                data: [100, 150, 120, 200, 180],
+                label: 'Energy Cost Savings ($)',
+                borderColor: '#4dbd74',
+                backgroundColor: 'transparent'
+              }
+            ]
+          },
+          options: {
+            maintainAspectRatio: false,
+            scales: {
+              x: { beginAtZero: true },
+              y: { beginAtZero: true }
+            }
+        }
+    };
+    
+    
+
         this.vibrationChart = {
           type: 'line' as ChartType,
           data: {
@@ -192,24 +283,24 @@ export class DashboardChartsData {
     };
   }
 
-  public maintenanceChart: IChartProps = {
-    type: 'bar' as ChartType,
-    data: {
-      labels: ['January', 'February', 'March', 'April', 'May'],
-      datasets: [
-        {
-          data: [3, 2, 4, 1, 3],
-          label: 'Maintenance Activities',
-          backgroundColor: '#ffc107'
-        }
-      ]
-    },
-    options: {
-      maintainAspectRatio: false,
-      scales: {
-        x: { beginAtZero: true },
-        y: { beginAtZero: true }
-      }
-    }
-  };
+  // public maintenanceChart: IChartProps = {
+  //   type: 'bar' as ChartType,
+  //   data: {
+  //     labels: ['January', 'February', 'March', 'April', 'May'],
+  //     datasets: [
+  //       {
+  //         data: [3, 2, 4, 1, 3],
+  //         label: 'Maintenance Activities',
+  //         backgroundColor: '#ffc107'
+  //       }
+  //     ]
+  //   },
+  //   options: {
+  //     maintainAspectRatio: false,
+  //     scales: {
+  //       x: { beginAtZero: true },
+  //       y: { beginAtZero: true }
+  //     }
+  //   }
+  // };
 }
