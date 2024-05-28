@@ -191,4 +191,25 @@ export class DashboardChartsData {
       }
     };
   }
+
+  public maintenanceChart: IChartProps = {
+    type: 'bar' as ChartType,
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May'],
+      datasets: [
+        {
+          data: [3, 2, 4, 1, 3],
+          label: 'Maintenance Activities',
+          backgroundColor: '#ffc107'
+        }
+      ]
+    },
+    options: {
+      maintainAspectRatio: false,
+      scales: {
+        x: { beginAtZero: true },
+        y: { beginAtZero: true }
+      }
+    }
+  };
 }

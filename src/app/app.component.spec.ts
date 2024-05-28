@@ -18,9 +18,9 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'CoreUI Angular Admin Template'`, () => {
+  it(`should have as title 'SCA Crane Monitoring Dashbaord'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('CoreUI Angular Admin Template');
+    expect(app.title).toEqual('SCA Crane Monitoring Dashbaord');
   });
 });

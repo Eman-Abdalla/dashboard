@@ -77,6 +77,7 @@ export class DashboardComponent implements OnInit {
   arrayItem: any[] = [];
   accData: number[][] = [];
   gyroData: number[][] = [];
+  maintenanceChart:number[][] = [];
   readonly destroyRef: DestroyRef = inject(DestroyRef);
   readonly document: Document = inject(DOCUMENT);
   readonly renderer: Renderer2 = inject(Renderer2);
@@ -168,6 +169,7 @@ export class DashboardComponent implements OnInit {
   public accelerationChart: IChartProps = { type: 'line' as ChartType };
   public gyroChart: IChartProps = { type: 'line' as ChartType };
   public vibrationChart: IChartProps = { type: 'line' as ChartType };
+  public maintenanceChart: IChartProps = { type: 'line' as ChartType };
   public mainChartRef: WritableSignal<any> = signal(undefined);
   mainChartRefEffect = effect(() => {
     if (this.mainChartRef()) {
@@ -184,6 +186,7 @@ export class DashboardComponent implements OnInit {
       this.accelerationChart = this.chartData.accelerationChart;
       this.gyroChart = this.chartData.gyroChart;
       this.vibrationChart = this.chartData.vibrationChart;
+      this.maintenanceChart = this.chartData.maintenanceChart;
     });
     this.updateChartOnColorModeChange();
 
